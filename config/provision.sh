@@ -1,14 +1,15 @@
 	
 	#Update Aptitude
     sudo apt-get update && sudo apt-get upgrade
-	sudo apt-get install gcc build-essential module-assistant
+	sudo apt-get install -y gcc build-essential module-assistant
+	sudo apt-get install virtualbox-guest-additions-iso -y 
 	
 	#Install Emacs and gedit
 	#sudo apt-get install emacs -y 
 	#sudo apt-get install gedit
 	
 	#Install Iceweasel
-	sudo apt-get install iceweasel -y
+	#sudo apt-get install iceweasel -y
 	
 	#Install libreoffice
 	#sudo apt-get install libreoffice -y
@@ -44,25 +45,35 @@
 	
 	#Set Superuser: vagrant user already NOPASSWD superuser
 	
-	#Install python mysql dependencies
-	sudo apt-get install -y python-pip apache2 libapache2-mod-wsgi
-	#sudo apt-get install -y mysql-server mysql-client
-	#sudo apt-get install libmysqlclient-dev -y 
-	#sudo apt-get install python-mysqldb -y 
-	#sudo apt-get install python-dev -y 
-	#sudo apt-get install -y libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
-	sudo pip install virtualenv
-	wget -O /home/vagrant/config/ez_setup.py "https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py"
-	python /home/vagrant/config/ez_setup.py 
+	#Install python deps dependencies
+	sudo apt-get install -y python-pip libapache2-mod-wsgi
+	
+	#Install pip
+	mkdir /home/vagrant/Downloads
+	cd /home/vagrant/Downloads
+	wget "https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py"
+	python ez_setup.py 
 	easy_install pip 
+	
+	#set mysql root password to root and install mysql and python deps 
+	sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
+	sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
+	sudo apt-get -y install mysql-server
+	sudo apt-get install -y mysql-client
+	sudo apt-get install libmysqlclient-dev -y 
+	sudo apt-get install python-mysqldb -y 
+	sudo apt-get install python-dev -y 
+	sudo apt-get install -y libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
+	sudo pip install virtualenv
 
+	#make project directory, git clone project, copy settings.py for webapp, and change ownership of it all to vagrant user 
 	mkdir /srv/nelsonlab
 	cd /srv/nelsonlab
 	git clone https://github.com/nelsonlab/django_NelsonDB.git
 	cp /home/vagrant/config/settings.py /srv/nelsonlab/django_NelsonDB/webapp/ 
+	sudo chown vagrant:vagrant /srv/nelsonlab/
 	virtualenv venv 
 	source venv/bin/activate
-	pip install -U setuptools pip
 	pip install django mysql-python
 	pip install Pillow
 	
@@ -86,6 +97,6 @@
 	#sudo python manage.py migrate
 	
 	#Start GNOME3 GUI
-	sudo gdm start&
+	sudo gdm start 
 	#startx&
 	

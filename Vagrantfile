@@ -48,9 +48,24 @@ Vagrant.configure(2) do |config|
   
     # Display the VirtualBox GUI when booting the machine
     vb.gui = true
+	v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
  
     # Customize the amount of memory on the VM:
-    vb.memory = "2048"
+    vb.memory = "4096"
+	v.customize ["modifyvm", :id, "--vram", "32"]
+	
+	vb.customize ["modifyvm", :id, "--ioapic", "on"]
+    # Enable the use of hardware virtualization extensions (Intel VT-x or AMD-V) in the processor of your host system
+	vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
+    # Enable, if Guest Additions are installed, whether hardware 3D acceleration should be available
+	vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
+	# Enable the VM's virtual USB controller & enable the virtual USB 2.0 controller
+    vb.customize ["modifyvm", :id, "--usb", "on", "--usbehci", "on"]
+    # Add IDE controller to the VM, to allow virtual media to be attached to the controller
+    vb.customize ["storagectl", :id, "--name", "IDE Controller", "--add", "ide"]
+    # Give the VM access to the host's CD/DVD drive, by attaching the medium to the virtual IDE controller
+    vb.customize ["storageattach", :id, "--storagectl", "IDE Controller", "--port 0", "--device 0", "--type", "dvddrive"]
+	
   end
  
   # View the documentation for the provider you are using for more
