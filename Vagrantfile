@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 80, host: 8080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -37,7 +37,7 @@ Vagrant.configure(2) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder "config", "/home/vagrant/config"
+  config.vm.synced_folder "config/", "/home/vagrant/config"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -48,11 +48,11 @@ Vagrant.configure(2) do |config|
   
     # Display the VirtualBox GUI when booting the machine
     vb.gui = true
-	v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+	vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
  
     # Customize the amount of memory on the VM:
     vb.memory = "4096"
-	v.customize ["modifyvm", :id, "--vram", "32"]
+	vb.customize ["modifyvm", :id, "--vram", "32"]
 	
 	vb.customize ["modifyvm", :id, "--ioapic", "on"]
     # Enable the use of hardware virtualization extensions (Intel VT-x or AMD-V) in the processor of your host system
@@ -64,7 +64,7 @@ Vagrant.configure(2) do |config|
     # Add IDE controller to the VM, to allow virtual media to be attached to the controller
     vb.customize ["storagectl", :id, "--name", "IDE Controller", "--add", "ide"]
     # Give the VM access to the host's CD/DVD drive, by attaching the medium to the virtual IDE controller
-    vb.customize ["storageattach", :id, "--storagectl", "IDE Controller", "--port 0", "--device 0", "--type", "dvddrive"]
+    #vb.customize ["storageattach", :id, "--storagectl", "IDE Controller", "--port 0", "--device 0", "--type", "dvddrive"]
 	
   end
  
