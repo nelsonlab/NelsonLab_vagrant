@@ -1,5 +1,8 @@
 # vagrant
 
+This will set up a fully functional development environment. No more wondering if your machine is configured correctly, and no more wasting time setting up dependencies. 
+Spin up a NelsonLab virtual machine and start developing.
+
 ##Pre-reqs
 
 Install Vagrant from https://www.vagrantup.com/downloads.html
