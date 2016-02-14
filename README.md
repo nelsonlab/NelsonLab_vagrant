@@ -25,9 +25,9 @@ git clone https://github.com/solgenomics/SGN_vagrant.git
 
 ##Using vagrant
 
-Go that the SGN_vagrant directory
+Go to the NelsonLab_vagrant directory that you git cloned.
 ```
-cd vagrant/SGN_vagrant/
+cd vagrant/NelsonLab_vagrant/
 ```
 
 Tell vagrant to configure the VM
@@ -52,7 +52,7 @@ username: vagrant
 password: vagrant
 ```
 
-Localhost apache server is running, so just go to 
+Localhost apache server is running, so project is running by default 
 ```
 On VM: localhost:80
 On Host: localhost:8080
