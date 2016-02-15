@@ -61,3 +61,8 @@ On VM: localhost:80
 On Host: localhost:8080
 ```
 
+##Known Issues:
+
+The GUI is unresponsive the first time you setup the VM. You have to reset the VM. In VirtualBox, go to Machine->Reset.
+
+
