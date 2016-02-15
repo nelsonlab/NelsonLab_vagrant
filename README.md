@@ -61,6 +61,16 @@ On VM: localhost:80
 On Host: localhost:8080
 ```
 
+The terminal is Byobu.
+
+Text editors on the machine are:
+```
+subl
+emacs
+gedit
+```
+I prefer to use the sublime text editor.
+
 ##Known Issues:
 
 The GUI is unresponsive the first time you setup the VM. You have to reset the VM. In VirtualBox, go to Machine->Reset.
