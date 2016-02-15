@@ -11,7 +11,7 @@ Make sure you have VirtualBox AND the VirtualBox Extension Pack installed
 https://www.virtualbox.org/wiki/Downloads
 
 
-##Initializing vagrant 
+##Initializing
 
 Make a directory for vagrant on your machine
 ```
