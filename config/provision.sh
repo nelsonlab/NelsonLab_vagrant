@@ -5,8 +5,8 @@
 	sudo apt-get install virtualbox-guest-additions-iso -y 
 	
 	#Install Emacs and gedit
-	#sudo apt-get install emacs -y 
-	#sudo apt-get install gedit
+	sudo apt-get install emacs -y 
+	sudo apt-get install gedit
 	
 	#Install Sublime text editor
 	sudo add-apt-repository ppa:webupd8team/sublime-text-3
