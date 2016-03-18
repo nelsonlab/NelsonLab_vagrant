@@ -36,6 +36,9 @@
 	#Install full gnome (takes forever)
 	# sudo apt-get install ubuntu-gnome-desktop -y
 	
+	#Install file manager
+	sudo apt-get install nautilus -y
+	
 	#Install linux headers for good measure
 	sudo apt-get install linux-headers-$(uname -r) -y
 	
