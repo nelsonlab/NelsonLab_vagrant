@@ -6,12 +6,12 @@
 	
 	#Install Emacs and gedit
 	sudo apt-get install emacs -y 
-	sudo apt-get install gedit
+	sudo apt-get install gedit -y
 	
 	#Install Sublime text editor
-	sudo add-apt-repository ppa:webupd8team/sublime-text-3
-	sudo apt-get update
-	sudo apt-get install sublime-text-installer
+	#sudo add-apt-repository ppa:webupd8team/sublime-text-3
+	#sudo apt-get update
+	#sudo apt-get install sublime-text-installer
 	
 	#Install Iceweasel
 	sudo apt-get install iceweasel -y
@@ -29,9 +29,11 @@
 	sudo apt-get install wget -y 
 	
 	#Install barebones gnome GUI
+	sudo apt-get install gnome-core -y
 	sudo apt-get install gnome-shell -y
 	sudo apt-get install gnome-terminal -y
 	sudo apt-get install x-terminal-emulator -y
+	sudo apt-get install -y gnome-screensaver gnome-tweak-tool
 	
 	#Install full gnome (takes forever)
 	# sudo apt-get install ubuntu-gnome-desktop -y
@@ -91,6 +93,19 @@
 	sudo cp /home/vagrant/config/wsgi.py /srv/nelsonlab/django_NelsonDB/webapp/
 	sudo a2ensite nelsonlab.conf
 	sudo service apache2 reload
+	
+	#Install Atom text editor and cleanup
+	sudo apt-get install xdg-utils -y
+	wget https://github.com/atom/atom/releases/download/v1.6.0/atom-amd64.deb
+	sudo dpkg --install atom-amd64.deb
+	sudo apt-get -f install -y
+	rm atom-amd64.deb
+	
+	#Install Chrome and cleanup
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+	sudo dpkg --install google-chrome-stable_current_amd64.deb
+	sudo apt-get -f install -y
+	rm google-chrome-stable_current_amd64.deb
 	
 	#Start GNOME3 GUI
 	sudo gdm start&
