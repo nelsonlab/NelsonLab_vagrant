@@ -1,3 +1,20 @@
+
+	#Change hostname to nelsonlab
+	old=$(hostname)
+	new="nelsonlab"
+	for file in \
+	   /etc/exim4/update-exim4.conf.conf \
+	   /etc/printcap \
+	   /etc/hostname \
+	   /etc/hosts \
+	   /etc/ssh/ssh_host_rsa_key.pub \
+	   /etc/ssh/ssh_host_dsa_key.pub \
+	   /etc/motd \
+	   /etc/ssmtp/ssmtp.conf
+	do
+	   sudo [ -f $file ] && sudo sed -i.old -e "s:$old:$new:g" $file
+	done
+	sudo hostname nelsonlab
 	
 	#Update Aptitude
     sudo apt-get update && sudo apt-get upgrade
@@ -34,6 +51,9 @@
 	sudo apt-get install gnome-terminal -y
 	sudo apt-get install x-terminal-emulator -y
 	sudo apt-get install -y gnome-screensaver gnome-tweak-tool
+	sudo add-apt-repository ppa:webupd8team/gnome3
+	sudo apt-get update
+	sudo apt-get install gnome-shell-extensions -y
 	
 	#Install full gnome (takes forever)
 	# sudo apt-get install ubuntu-gnome-desktop -y
