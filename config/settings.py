@@ -35,8 +35,6 @@ SECRET_KEY = 'r7+a3!y)0+nt*vdrxizjvjc*+2jqp#6zir%17_qtk%eofsg*0&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = []
 
 SITE_NAME = 'Nelson Lab'
@@ -65,7 +63,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'webapp.urls'
 
-WSGI_APPLICATION = 'webapp.wsgi.application'
+#WSGI_APPLICATION = 'webapp.wsgi.application'
 
 
 # Database
@@ -109,20 +107,30 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
 
-TEMPLATE_DIRS = (
-	TEMPLATE_PATH,
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            TEMPLATE_PATH
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+                'lab.sitespecifics.sitespecifics'
+            ],
+        },
+    },
+]
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'lab.sitespecifics.sitespecifics'
-)
 
 #--------------PROD SETTINGS ---------------------------
 #STATICFILES_DIRS = (
@@ -157,3 +165,4 @@ LOGGING = {
         },
     },
 }
+
