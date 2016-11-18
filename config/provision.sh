@@ -73,14 +73,15 @@
 	#Set Superuser: vagrant user already NOPASSWD superuser
 	
 	#Install python deps dependencies
-	sudo apt-get install -y python-pip libapache2-mod-wsgi
+	sudo apt-get install -y python3-dev libmysqlclient-dev
+	sudo apt-get install -y python3-pip libapache2-mod-wsgi
 	
 	#Install pip
-	mkdir /home/vagrant/Downloads
-	cd /home/vagrant/Downloads
-	wget "https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py"
-	python ez_setup.py 
-	easy_install pip 
+	#mkdir /home/vagrant/Downloads
+	#cd /home/vagrant/Downloads
+	#wget "https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py"
+	#python ez_setup.py 
+	#easy_install pip 
 	
 	#Install mysql with no password for root user  
 	DEBIAN_FRONTEND=noninteractive sudo -E apt-get install -y mysql-server-5.5
@@ -89,17 +90,18 @@
 	sudo apt-get install -y libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
 
 	#Make project directory, git clone project, copy settings.py for webapp, and change ownership of it all to vagrant user 
-	sudo pip install virtualenv
+	sudo pip3 install virtualenv
 	mkdir /srv/nelsonlab
 	cd /srv/nelsonlab
 	git clone https://github.com/nelsonlab/django_NelsonDB.git
 	cp /home/vagrant/config/settings.py /srv/nelsonlab/django_NelsonDB/webapp/ 
 	sudo chown vagrant:vagrant -R /srv/nelsonlab/
 	#Make virtualenv and enter venv and install python project app deps 
-	virtualenv venv 
-	source venv/bin/activate
-	pip install django mysql-python Pillow
-	
+	virtualenv -p python3 venv2
+	source venv2/bin/activate
+	#pip3 install django mysql-python Pillow biopython
+	pip3 install django mysqlclient Pillow NumPy biopython
+
 	#Start mysql, create database, and load initial sql dump
 	mysql -u root -e "create database nelsondb_test CHARACTER SET utf8";
 	cd /srv/nelsonlab/django_NelsonDB
